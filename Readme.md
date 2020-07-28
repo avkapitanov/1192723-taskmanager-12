@@ -1,7 +1,7 @@
 # Личный проект «Менеджер задач» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артем Капитанов](https://up.htmlacademy.ru/ecmascript/12/user/1192723).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Рожков](https://up.htmlacademy.ru/ecmascript/12/user/1069033).
 
 ---
 
