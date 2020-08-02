@@ -7,3 +7,11 @@
 *.woff binary
 *.woff2 binary
 .idea
+
+# Вспомогательные файлы
+*.log*
+node_modules/
+
+# Собранные JS-файлы (бандл)
+/public/bundle.js
+/public/bundle.js.map
