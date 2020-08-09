@@ -30,9 +30,11 @@ render(boardElement, createSortTemplate(), `afterBegin`);
 
 render(taskListElement, createTaskEditTemplate(tasks[0]), `beforeend`);
 
-for (let i = 1, len = Math.min(tasks.length, TASK_COUNT_PER_STEP); i < len; i++) {
-  render(taskListElement, createTaskTemplate(tasks[i]), `beforeend`);
-}
+tasks
+  .slice(0, Math.min(tasks.length, TASK_COUNT_PER_STEP))
+  .forEach((task) => {
+    render(taskListElement, createTaskTemplate(task), `beforeend`);
+  });
 
 if (tasks.length > TASK_COUNT_PER_STEP) {
   let renderedTaskCount = TASK_COUNT_PER_STEP;

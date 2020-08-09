@@ -10,4 +10,5 @@ export const DAYS_FOR_NOT_REPEATING_TASK = {
 };
 export const TASK_COUNT = 22;
 export const TASK_COUNT_PER_STEP = 8;
+export const MAX_DAY_GAP = 7;
 

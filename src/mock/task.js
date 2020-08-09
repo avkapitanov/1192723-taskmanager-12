@@ -1,15 +1,15 @@
-import {COLORS, DAYS_FOR_NOT_REPEATING_TASK} from "../const.js";
+import {COLORS, DAYS_FOR_NOT_REPEATING_TASK, MAX_DAY_GAP} from "../const.js";
 import {getRandomInteger} from "../utils.js";
 
-const generateDescription = () => {
-  const descriptions = [
-    `Example task with default color.`,
-    `Example task with custom color.`,
-    `Example task with custom color and without date.`,
-    `Example task without date.`,
-    `It is example of repeating task. It marks by wave.`
-  ];
+const descriptions = [
+  `Example task with default color.`,
+  `Example task with custom color.`,
+  `Example task with custom color and without date.`,
+  `Example task without date.`,
+  `It is example of repeating task. It marks by wave.`
+];
 
+const generateDescription = () => {
   const randomIndex = getRandomInteger(0, descriptions.length - 1);
 
   return descriptions[randomIndex];
@@ -22,8 +22,7 @@ const generateDate = () => {
     return null;
   }
 
-  const maxDaysGap = 7;
-  const daysGap = getRandomInteger(-maxDaysGap, maxDaysGap);
+  const daysGap = getRandomInteger(-MAX_DAY_GAP, MAX_DAY_GAP);
   const currentDate = new Date();
 
   currentDate.setHours(23, 59, 59, 999);
