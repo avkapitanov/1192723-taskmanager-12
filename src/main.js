@@ -31,7 +31,7 @@ render(boardElement, createSortTemplate(), `afterBegin`);
 render(taskListElement, createTaskEditTemplate(tasks[0]), `beforeend`);
 
 tasks
-  .slice(0, Math.min(tasks.length, TASK_COUNT_PER_STEP))
+  .slice(0, TASK_COUNT_PER_STEP)
   .forEach((task) => {
     render(taskListElement, createTaskTemplate(task), `beforeend`);
   });
