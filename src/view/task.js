@@ -1,33 +1,40 @@
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate, humanizeTaskDueTime} from "../utils.js";
+import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate, humanizeTaskDueTime, createElement} from "../utils.js";
 
-export const createTaskTemplate = (task) => {
-  const {color, description, dueDate, repeating, isArchive, isFavorite} = task;
+export default class Task {
+  constructor(task) {
+    this._task = task;
 
-  const date = dueDate !== null
-    ? humanizeTaskDueDate(dueDate)
-    : ``;
-  const time = dueDate !== null
-    ? humanizeTaskDueTime(dueDate)
-    : ``;
+    this._element = null;
+  }
 
-  const deadlineClassName = isTaskExpired(dueDate)
-    ? `card--deadline`
-    : ``;
+  getTemplate() {
+    const {color, description, dueDate, repeating, isArchive, isFavorite} = this._task;
 
-  const repeatClassName = isTaskRepeating(repeating)
-    ? `card--repeat`
-    : ``;
+    const date = dueDate !== null
+      ? humanizeTaskDueDate(dueDate)
+      : ``;
+    const time = dueDate !== null
+      ? humanizeTaskDueTime(dueDate)
+      : ``;
 
-  const archiveClassName = isArchive
-    ? `card__btn--archive card__btn--disabled`
-    : `card__btn--archive`;
+    const deadlineClassName = isTaskExpired(dueDate)
+      ? `card--deadline`
+      : ``;
 
-  const favoriteClassName = isFavorite
-    ? `card__btn--favorites card__btn--disabled`
-    : `card__btn--favorites`;
+    const repeatClassName = isTaskRepeating(repeating)
+      ? `card--repeat`
+      : ``;
 
-  return (
-    `<article class="card card--${color} ${deadlineClassName} ${repeatClassName}">
+    const archiveClassName = isArchive
+      ? `card__btn--archive card__btn--disabled`
+      : `card__btn--archive`;
+
+    const favoriteClassName = isFavorite
+      ? `card__btn--favorites card__btn--disabled`
+      : `card__btn--favorites`;
+
+    return (
+      `<article class="card card--${color} ${deadlineClassName} ${repeatClassName}">
       <div class="card__form">
         <div class="card__inner">
           <div class="card__control">
@@ -70,5 +77,18 @@ export const createTaskTemplate = (task) => {
         </div>
       </div>
     </article>`
-  );
-};
+    );
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
