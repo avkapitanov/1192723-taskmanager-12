@@ -1,5 +1,5 @@
 import {COLORS, DAYS_FOR_NOT_REPEATING_TASK, MAX_DAY_GAP} from "../const.js";
-import {getRandomInteger} from "../utils.js";
+import {getRandomInteger} from "../utils/common.js";
 
 const descriptions = [
   `Example task with default color.`,
