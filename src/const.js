@@ -11,4 +11,15 @@ export const DAYS_FOR_NOT_REPEATING_TASK = {
 export const TASK_COUNT = 22;
 export const TASK_COUNT_PER_STEP = 8;
 export const MAX_DAY_GAP = 7;
+export const DATE_LOCALE = `en-US`;
 
+export const RENDER_POSITION = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
+};
+
+export const SORT_TYPE = {
+  DEFAULT: `default`,
+  DATE_DOWN: `date-down`,
+  DATE_UP: `date-up`
+};

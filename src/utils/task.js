@@ -1,3 +1,5 @@
+import {DATE_LOCALE} from "../const.js";
+
 export const getCurrentDate = () => {
   const currentDate = new Date();
   currentDate.setHours(23, 59, 59, 999);
@@ -30,10 +32,45 @@ export const isTaskExpiringToday = (dueDate) => {
 };
 
 export const humanizeTaskDueDate = (dueDate) => {
-  return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
+  return dueDate.toLocaleString(DATE_LOCALE, {day: `numeric`, month: `long`});
 };
 
 export const humanizeTaskDueTime = (dueDate) => {
-  return dueDate.toLocaleString(`en-US`, {hour: `2-digit`, minute: `2-digit`});
+  return dueDate.toLocaleString(DATE_LOCALE, {hour: `2-digit`, minute: `2-digit`});
 };
 
+const getWeightForNullDate = (dateA, dateB) => {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+};
+
+export const sortTaskUp = (taskA, taskB) => {
+  const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
+
+  if (weight !== null) {
+    return weight;
+  }
+
+  return taskA.dueDate.getTime() - taskB.dueDate.getTime();
+};
+
+export const sortTaskDown = (taskA, taskB) => {
+  const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
+
+  if (weight !== null) {
+    return weight;
+  }
+
+  return taskB.dueDate.getTime() - taskA.dueDate.getTime();
+};
