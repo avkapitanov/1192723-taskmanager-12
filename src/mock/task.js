@@ -9,6 +9,8 @@ const descriptions = [
   `It is example of repeating task. It marks by wave.`
 ];
 
+const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
+
 const generateDescription = () => {
   const randomIndex = getRandomInteger(0, descriptions.length - 1);
 
@@ -57,6 +59,7 @@ export const generateTask = () => {
     : DAYS_FOR_NOT_REPEATING_TASK;
 
   return {
+    id: generateId(),
     description: generateDescription(),
     dueDate,
     repeating,

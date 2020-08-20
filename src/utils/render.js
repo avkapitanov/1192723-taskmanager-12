@@ -1,5 +1,5 @@
 import Abstract from "../view/abstract.js";
-import {RENDER_POSITION} from "../const.js";
+import {RenderPosition} from "../const.js";
 
 export const renderElement = (container, child, place) => {
   if (container instanceof Abstract) {
@@ -11,10 +11,10 @@ export const renderElement = (container, child, place) => {
   }
 
   switch (place) {
-    case RENDER_POSITION.AFTERBEGIN:
+    case RenderPosition.AFTERBEGIN:
       container.prepend(child);
       break;
-    case RENDER_POSITION.BEFOREEND:
+    case RenderPosition.BEFOREEND:
       container.append(child);
       break;
   }
