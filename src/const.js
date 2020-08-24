@@ -13,13 +13,18 @@ export const TASK_COUNT_PER_STEP = 8;
 export const MAX_DAY_GAP = 7;
 export const DATE_LOCALE = `en-US`;
 
-export const RENDER_POSITION = {
+export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
 };
 
-export const SORT_TYPE = {
+export const SortType = {
   DEFAULT: `default`,
   DATE_DOWN: `date-down`,
   DATE_UP: `date-up`
+};
+
+export const Mode = {
+  DEFAULT: `DEFAULT`,
+  EDITING: `EDITING`
 };
