@@ -1,4 +1,4 @@
-import {DATE_LOCALE} from "../const.js";
+import moment from "moment";
 
 export const getCurrentDate = () => {
   const currentDate = new Date();
@@ -31,12 +31,20 @@ export const isTaskExpiringToday = (dueDate) => {
   return currentDate.getTime() === dueDate.getTime();
 };
 
-export const humanizeTaskDueDate = (dueDate) => {
-  return dueDate.toLocaleString(DATE_LOCALE, {day: `numeric`, month: `long`});
+export const formatTaskDueDate = (dueDate) => {
+  if (!(dueDate instanceof Date)) {
+    return ``;
+  }
+
+  return moment(dueDate).format(`D MMMM`);
 };
 
-export const humanizeTaskDueTime = (dueDate) => {
-  return dueDate.toLocaleString(DATE_LOCALE, {hour: `2-digit`, minute: `2-digit`});
+export const formatTaskDueTime = (dueDate) => {
+  if (!(dueDate instanceof Date)) {
+    return ``;
+  }
+
+  return moment(dueDate).format(`LT`);
 };
 
 const getWeightForNullDate = (dateA, dateB) => {
