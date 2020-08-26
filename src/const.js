@@ -27,3 +27,28 @@ export const Mode = {
   DEFAULT: `DEFAULT`,
   EDITING: `EDITING`
 };
+
+export const TASK_DATE_FORMAT = `j F`;
+export const TASK_CARD_DATE_MOMENT_FORMAT = `D MMMM`;
+export const TASK_CARD_TIME_MOMENT_FORMAT = `hh:mm A`;
+
+export const UserAction = {
+  UPDATE_TASK: `UPDATE_TASK`,
+  ADD_TASK: `ADD_TASK`,
+  DELETE_TASK: `DELETE_TASK`
+};
+
+export const UpdateType = {
+  PATCH: `PATCH`,
+  MINOR: `MINOR`,
+  MAJOR: `MAJOR`
+};
+
+export const FilterType = {
+  ALL: `all`,
+  OVERDUE: `overdue`,
+  TODAY: `today`,
+  FAVORITES: `favorites`,
+  REPEATING: `repeating`,
+  ARCHIVE: `archive`
+};

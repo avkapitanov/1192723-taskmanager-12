@@ -1,5 +1,5 @@
-import {COLORS, DAYS_FOR_NOT_REPEATING_TASK, MAX_DAY_GAP} from "../const.js";
-import {getRandomInteger} from "../utils/common.js";
+import {COLORS, DAYS_FOR_NOT_REPEATING_TASK, MAX_DAY_GAP} from "../const";
+import {getRandomInteger} from "../utils/common";
 
 const descriptions = [
   `Example task with default color.`,
@@ -9,7 +9,7 @@ const descriptions = [
   `It is example of repeating task. It marks by wave.`
 ];
 
-const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
+export const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
 
 const generateDescription = () => {
   const randomIndex = getRandomInteger(0, descriptions.length - 1);

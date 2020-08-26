@@ -1,5 +1,5 @@
-import Abstract from "../view/abstract.js";
-import {RenderPosition} from "../const.js";
+import Abstract from "../view/abstract";
+import {RenderPosition} from "../const";
 
 export const renderElement = (container, child, place) => {
   if (container instanceof Abstract) {
@@ -39,6 +39,10 @@ export const replace = (newChild, oldChild) => {
 };
 
 export const remove = (component) => {
+  if (component === null) {
+    return;
+  }
+
   if (!(component instanceof Abstract)) {
     throw new Error(`Can remove only components`);
   }

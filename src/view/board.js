@@ -1,4 +1,4 @@
-import AbstractView from "./abstract.js";
+import AbstractView from "./abstract";
 
 export default class Board extends AbstractView {
   getTemplate() {

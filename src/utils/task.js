@@ -1,4 +1,9 @@
+import {TASK_CARD_DATE_MOMENT_FORMAT, TASK_CARD_TIME_MOMENT_FORMAT} from "../const";
 import moment from "moment";
+
+export const isDatesEqual = (dateA, dateB) => {
+  return moment(dateA).isSame(dateB);
+};
 
 export const getCurrentDate = () => {
   const currentDate = new Date();
@@ -36,7 +41,7 @@ export const formatTaskDueDate = (dueDate) => {
     return ``;
   }
 
-  return moment(dueDate).format(`D MMMM`);
+  return moment(dueDate).format(TASK_CARD_DATE_MOMENT_FORMAT);
 };
 
 export const formatTaskDueTime = (dueDate) => {
@@ -44,7 +49,7 @@ export const formatTaskDueTime = (dueDate) => {
     return ``;
   }
 
-  return moment(dueDate).format(`LT`);
+  return moment(dueDate).format(TASK_CARD_TIME_MOMENT_FORMAT);
 };
 
 const getWeightForNullDate = (dateA, dateB) => {
