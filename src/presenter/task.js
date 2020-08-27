@@ -1,7 +1,8 @@
 import TaskView from "../view/task";
 import TaskEditView from "../view/task-edit";
 import {renderElement, replace, remove} from "../utils/render";
-import {RenderPosition, Mode} from "../const";
+import {RenderPosition, Mode, UserAction, UpdateType} from "../const";
+import {isTaskRepeating, isDatesEqual} from "../utils/task";
 
 export default class Task {
   constructor(taskListContainer, changeData, changeMode) {
@@ -19,6 +20,7 @@ export default class Task {
     this._escKeyDownHandler = this._escKeyDownHandler.bind(this);
     this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
     this._handleArchiveClick = this._handleArchiveClick.bind(this);
+    this._handleDeleteClick = this._handleDeleteClick.bind(this);
   }
 
   init(task) {
@@ -34,6 +36,7 @@ export default class Task {
     this._taskEditComponent.setFormSubmitHandler(this._handleFormSubmit);
     this._taskComponent.setFavoriteClickHandler(this._handleFavoriteClick);
     this._taskComponent.setArchiveClickHandler(this._handleArchiveClick);
+    this._taskEditComponent.setDeleteClickHandler(this._handleDeleteClick);
 
     if (prevTaskComponent === null || prevTaskEditComponent === null) {
       renderElement(this._taskListContainer, this._taskComponent, RenderPosition.BEFOREEND);
@@ -89,12 +92,30 @@ export default class Task {
   }
 
   _handleFormSubmit(task) {
-    this._changeData(task);
+    const isMinorUpdate =
+      !isDatesEqual(this._task.dueDate, task.dueDate) ||
+      isTaskRepeating(this._task) !== isTaskRepeating(task);
+
+    this._changeData(
+        UserAction.UPDATE_TASK,
+        isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
+        task
+    );
     this._replaceFormToCard();
+  }
+
+  _handleDeleteClick(task) {
+    this._changeData(
+        UserAction.DELETE_TASK,
+        UpdateType.MINOR,
+        task
+    );
   }
 
   _handleFavoriteClick() {
     this._changeData(
+        UserAction.UPDATE_TASK,
+        UpdateType.MINOR,
         Object.assign(
             {},
             this._task,
@@ -107,6 +128,8 @@ export default class Task {
 
   _handleArchiveClick() {
     this._changeData(
+        UserAction.UPDATE_TASK,
+        UpdateType.MINOR,
         Object.assign(
             {},
             this._task,
