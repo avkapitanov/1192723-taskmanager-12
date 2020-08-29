@@ -1,4 +1,3 @@
-export const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
 export const DAYS_FOR_NOT_REPEATING_TASK = {
   mo: false,
   tu: false,
@@ -31,6 +30,8 @@ export const Mode = {
 export const TASK_DATE_FORMAT = `j F`;
 export const TASK_CARD_DATE_MOMENT_FORMAT = `D MMMM`;
 export const TASK_CARD_TIME_MOMENT_FORMAT = `hh:mm A`;
+export const DATEPICKER_STATISTICS_MODE = `range`;
+export const STATISTIC_CHART_DATE_FORMAT = `D MMM`;
 
 export const UserAction = {
   UPDATE_TASK: `UPDATE_TASK`,
@@ -52,3 +53,19 @@ export const FilterType = {
   REPEATING: `repeating`,
   ARCHIVE: `archive`
 };
+
+export const MenuItem = {
+  ADD_NEW_TASK: `ADD_NEW_TASK`,
+  TASKS: `TASKS`,
+  STATISTICS: `STATISTICS`
+};
+
+export const Color = {
+  BLACK: `black`,
+  YELLOW: `yellow`,
+  BLUE: `blue`,
+  GREEN: `green`,
+  PINK: `pink`
+};
+
+export const COLORS = Object.values(Color);

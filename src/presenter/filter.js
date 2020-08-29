@@ -1,5 +1,5 @@
 import FilterView from "../view/filter";
-import {renderElement, replace, remove} from "../utils/render";
+import {renderElement, replace, removeElement} from "../utils/render";
 import {filter} from "../utils/filter";
 import {FilterType, UpdateType, RenderPosition} from "../const";
 
@@ -34,7 +34,7 @@ export default class Filter {
     }
 
     replace(this._filterComponent, prevFilterComponent);
-    remove(prevFilterComponent);
+    removeElement(prevFilterComponent);
   }
 
   _handleModelEvent() {

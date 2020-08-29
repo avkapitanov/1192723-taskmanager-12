@@ -1,6 +1,6 @@
 import TaskView from "../view/task";
 import TaskEditView from "../view/task-edit";
-import {renderElement, replace, remove} from "../utils/render";
+import {renderElement, replace, removeElement} from "../utils/render";
 import {RenderPosition, Mode, UserAction, UpdateType} from "../const";
 import {isTaskRepeating, isDatesEqual} from "../utils/task";
 
@@ -51,13 +51,13 @@ export default class Task {
       replace(this._taskEditComponent, prevTaskEditComponent);
     }
 
-    remove(prevTaskComponent);
-    remove(prevTaskEditComponent);
+    removeElement(prevTaskComponent);
+    removeElement(prevTaskEditComponent);
   }
 
   destroy() {
-    remove(this._taskComponent);
-    remove(this._taskEditComponent);
+    removeElement(this._taskComponent);
+    removeElement(this._taskEditComponent);
   }
 
   resetView() {

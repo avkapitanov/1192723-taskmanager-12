@@ -5,7 +5,7 @@ import NoTaskView from "../view/no-task";
 import LoadMoreBtnView from "../view/load-more-btn";
 import TaskPresenter from "./task";
 import TaskNewPresenter from "./task-new";
-import {renderElement, remove} from "../utils/render";
+import {renderElement, removeElement} from "../utils/render";
 import {sortTaskUp, sortTaskDown} from "../utils/task";
 import {filter} from "../utils/filter";
 import {TASK_COUNT_PER_STEP, RenderPosition, SortType, UpdateType, UserAction, FilterType} from "../const";
@@ -35,9 +35,6 @@ export default class Board {
     this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
     this._handleModeChange = this._handleModeChange.bind(this);
 
-    this._tasksModel.addObserver(this._handleModelEvent);
-    this._filterModel.addObserver(this._handleModelEvent);
-
     this._taskNewPresenter = new TaskNewPresenter(this._taskListComponent, this._handleViewAction);
   }
 
@@ -45,13 +42,26 @@ export default class Board {
     renderElement(this._boardContainer, this._boardComponent, RenderPosition.BEFOREEND);
     renderElement(this._boardComponent, this._taskListComponent, RenderPosition.BEFOREEND);
 
+    this._tasksModel.addObserver(this._handleModelEvent);
+    this._filterModel.addObserver(this._handleModelEvent);
+
     this._renderBoard();
   }
 
-  createTask() {
+  destroy() {
+    this._clearBoard({resetRenderedTaskCount: true, resetSortType: true});
+
+    removeElement(this._taskListComponent);
+    removeElement(this._boardComponent);
+
+    this._tasksModel.removeObserver(this._handleModelEvent);
+    this._filterModel.removeObserver(this._handleModelEvent);
+  }
+
+  createTask(callback) {
     this._currentSortType = SortType.DEFAULT;
     this._filterModel.setFilter(UpdateType.MAJOR, FilterType.ALL);
-    this._taskNewPresenter.init();
+    this._taskNewPresenter.init(callback);
   }
 
   _getTasks() {
@@ -133,7 +143,7 @@ export default class Board {
     this._renderedTaskCount += TASK_COUNT_PER_STEP;
 
     if (this._renderedTaskCount >= tasks.length) {
-      remove(this._loadMoreButtonComponent);
+      removeElement(this._loadMoreButtonComponent);
     }
   }
 
@@ -170,9 +180,9 @@ export default class Board {
       .forEach((presenter) => presenter.destroy());
     this._taskPresenter = {};
 
-    remove(this._sortComponent);
-    remove(this._noTaskComponent);
-    remove(this._loadMoreButtonComponent);
+    removeElement(this._sortComponent);
+    removeElement(this._noTaskComponent);
+    removeElement(this._loadMoreButtonComponent);
 
     if (resetRenderedTaskCount) {
       this._renderedTaskCount = TASK_COUNT_PER_STEP;

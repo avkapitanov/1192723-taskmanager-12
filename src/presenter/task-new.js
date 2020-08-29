@@ -1,6 +1,6 @@
 import TaskEditView from "../view/task-edit";
 import {generateId} from "../mock/task";
-import {remove, renderElement} from "../utils/render";
+import {removeElement, renderElement} from "../utils/render";
 import {UserAction, UpdateType, RenderPosition} from "../const";
 
 export default class TaskNew {
@@ -9,13 +9,16 @@ export default class TaskNew {
     this._changeData = changeData;
 
     this._taskEditComponent = null;
+    this._destroyCallback = null;
 
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this._handleDeleteClick = this._handleDeleteClick.bind(this);
     this._escKeyDownHandler = this._escKeyDownHandler.bind(this);
   }
 
-  init() {
+  init(callback) {
+    this._destroyCallback = callback;
+
     if (this._taskEditComponent !== null) {
       return;
     }
@@ -34,7 +37,11 @@ export default class TaskNew {
       return;
     }
 
-    remove(this._taskEditComponent);
+    if (this._destroyCallback !== null) {
+      this._destroyCallback();
+    }
+
+    removeElement(this._taskEditComponent);
     this._taskEditComponent = null;
 
     document.removeEventListener(`keydown`, this._escKeyDownHandler);
